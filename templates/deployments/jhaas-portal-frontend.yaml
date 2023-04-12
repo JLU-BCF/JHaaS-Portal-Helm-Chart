@@ -19,13 +19,14 @@ spec:
         jhaas-portal.service: jhaas-portal-frontend
     spec:
       containers:
-          image: git.computational.bio.uni-giessen.de:5050/it/jhaas-frontend:master
+        - image: "{{ .Values.frontend.image.registry }}/{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
+          imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
           name: jhaas-portal-frontend
           ports:
             - containerPort: 80
           resources: {}
       imagePullSecrets:
-        - name: registry-credentials
+        - name: sec-jhaas-portal-registry-credentials
       hostname: jhaas-portal-frontend
       restartPolicy: Always
 status: {}

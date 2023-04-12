@@ -55,13 +55,15 @@ spec:
                 secretKeyRef:
                   key: POSTGRES_USER
                   name: sec-jhaas-portal-db
-          image: git.computational.bio.uni-giessen.de:5050/it/jhaas-backend:master
+          image: "{{ .Values.backend.image.registry }}/{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           name: jhaas-portal-backend
           ports:
             - containerPort: 8000
           resources: {}
       imagePullSecrets:
-        - name: registry-credentials
+        - name: sec-jhaas-portal-registry-credentials
       hostname: jhaas-portal-backend
       restartPolicy: Always
+      serviceAccountName: acc-tf-job-spawner
 status: {}
