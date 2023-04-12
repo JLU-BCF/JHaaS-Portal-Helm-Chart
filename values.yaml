@@ -46,11 +46,12 @@ postgres:
     tag: "15"
     pullPolicy: IfNotPresent
   conf:
+    # Leave Host empty to use db deployed by helm
     POSTGRES_HOST:
-    POSTGRES_PORT:
-    POSTGRES_DB:
-    POSTGRES_PASSWORD:
-    POSTGRES_USER:
+    POSTGRES_PORT: "5432"
+    POSTGRES_DB: jhaas-portal
+    POSTGRES_USER: jhaas-portal
+    POSTGRES_PASSWORD: super-secret-password-here
 
 ingress:
   className: ""

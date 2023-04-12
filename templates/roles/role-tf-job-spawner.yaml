@@ -3,8 +3,8 @@ kind: Role
 metadata:
   creationTimestamp: null
   labels:
-    jhaas-portal.role: tf-job-spawner
-  name: role-tf-job-spawner
+    {{ .Release.Name }}.role: {{ .Release.Name }}-tf-job-spawner
+  name: role-{{ .Release.Name }}-tf-job-spawner
 rules:
 - apiGroups: [""]
   resources: ["configmaps"]

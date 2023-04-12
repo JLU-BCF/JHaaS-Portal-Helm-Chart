@@ -3,15 +3,15 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    jhaas-portal.service: jhaas-portal-backend
-  name: sv-jhaas-portal-backend
+    {{ .Release.Name }}.service: {{ .Release.Name }}-backend
+  name: sv-{{ .Release.Name }}-backend
 spec:
   ports:
     - name: rest
-      port: 8000
-      targetPort: 8000
+      port: {{ .Values.backend.conf.PORT }}
+      targetPort: {{ .Values.backend.conf.PORT }}
       protocol: TCP
   selector:
-    jhaas-portal.service: jhaas-portal-backend
+    {{ .Release.Name }}.service: {{ .Release.Name }}-backend
 status:
   loadBalancer: {}

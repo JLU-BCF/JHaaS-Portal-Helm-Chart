@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    jhaas-portal.service: jhaas-portal-backend
-  name: jhaas-portal-backend
+    {{ .Release.Name }}.service: {{ .Release.Name }}-backend
+  name: {{ .Release.Name }}-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      jhaas-portal.service: jhaas-portal-backend
+      {{ .Release.Name }}.service: {{ .Release.Name }}-backend
   strategy:
     type: Recreate
   template:
     metadata:
       creationTimestamp: null
       labels:
-        jhaas-portal.service: jhaas-portal-backend
+        {{ .Release.Name }}.service: {{ .Release.Name }}-backend
     spec:
       containers:
         - env:
@@ -24,46 +24,46 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: NODE_ENV
-                  name: env-jhaas-portal-backend
+                  name: env-{{ .Release.Name }}-backend
             - name: SERVER_PORT
               valueFrom:
                 configMapKeyRef:
                   key: SERVER_PORT
-                  name: env-jhaas-portal-backend
+                  name: env-{{ .Release.Name }}-backend
             - name: POSTGRES_HOST
               valueFrom:
                 configMapKeyRef:
                   key: POSTGRES_HOST
-                  name: env-jhaas-portal-db
+                  name: env-{{ .Release.Name }}-db
             - name: POSTGRES_PORT
               valueFrom:
                 configMapKeyRef:
                   key: POSTGRES_PORT
-                  name: env-jhaas-portal-db
+                  name: env-{{ .Release.Name }}-db
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
                   key: POSTGRES_DB
-                  name: sec-jhaas-portal-db
+                  name: sec-{{ .Release.Name }}-db
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: POSTGRES_PASSWORD
-                  name: sec-jhaas-portal-db
+                  name: sec-{{ .Release.Name }}-db
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
                   key: POSTGRES_USER
-                  name: sec-jhaas-portal-db
+                  name: sec-{{ .Release.Name }}-db
           image: "{{ .Values.backend.image.registry }}/{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
-          name: jhaas-portal-backend
+          name: {{ .Release.Name }}-backend
           ports:
-            - containerPort: 8000
+            - containerPort: {{ .Values.backend.conf.PORT }}
           resources: {}
       imagePullSecrets:
-        - name: sec-jhaas-portal-registry-credentials
-      hostname: jhaas-portal-backend
+        - name: sec-{{ .Release.Name }}-registry-credentials
+      hostname: {{ .Release.Name }}-backend
       restartPolicy: Always
-      serviceAccountName: acc-tf-job-spawner
+      serviceAccountName: acc-{{ .Release.Name }}-tf-job-spawner
 status: {}

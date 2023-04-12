@@ -3,30 +3,30 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    jhaas-portal.service: jhaas-portal-frontend
-  name: jhaas-portal-frontend
+    {{ .Release.Name }}.service: {{ .Release.Name }}-frontend
+  name: {{ .Release.Name }}-frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      jhaas-portal.service: jhaas-portal-frontend
+      {{ .Release.Name }}.service: {{ .Release.Name }}-frontend
   strategy:
     type: Recreate
   template:
     metadata:
       creationTimestamp: null
       labels:
-        jhaas-portal.service: jhaas-portal-frontend
+        {{ .Release.Name }}.service: {{ .Release.Name }}-frontend
     spec:
       containers:
         - image: "{{ .Values.frontend.image.registry }}/{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
           imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
-          name: jhaas-portal-frontend
+          name: {{ .Release.Name }}-frontend
           ports:
-            - containerPort: 80
+            - containerPort: {{ .Values.frontend.conf.PORT }}
           resources: {}
       imagePullSecrets:
-        - name: sec-jhaas-portal-registry-credentials
-      hostname: jhaas-portal-frontend
+        - name: sec-{{ .Release.Name }}-registry-credentials
+      hostname: {{ .Release.Name }}-frontend
       restartPolicy: Always
 status: {}

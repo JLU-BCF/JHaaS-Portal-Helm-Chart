@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    jhaas-portal.service: jhaas-portal-db
-  name: jhaas-portal-db
+    {{ .Release.Name }}.service: {{ .Release.Name }}-db
+  name: {{ .Release.Name }}-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      jhaas-portal.service: jhaas-portal-db
+      {{ .Release.Name }}.service: {{ .Release.Name }}-db
   strategy:
     type: Recreate
   template:
     metadata:
       creationTimestamp: null
       labels:
-        jhaas-portal.service: jhaas-portal-db
+        {{ .Release.Name }}.service: {{ .Release.Name }}-db
     spec:
       containers:
         - env:
@@ -24,40 +24,40 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: POSTGRES_HOST
-                  name: env-jhaas-portal-db
+                  name: env-{{ .Release.Name }}-db
             - name: POSTGRES_PORT
               valueFrom:
                 configMapKeyRef:
                   key: POSTGRES_PORT
-                  name: env-jhaas-portal-db
+                  name: env-{{ .Release.Name }}-db
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
                   key: POSTGRES_DB
-                  name: sec-jhaas-portal-db
+                  name: sec-{{ .Release.Name }}-db
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: POSTGRES_PASSWORD
-                  name: sec-jhaas-portal-db
+                  name: sec-{{ .Release.Name }}-db
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
                   key: POSTGRES_USER
-                  name: sec-jhaas-portal-db
+                  name: sec-{{ .Release.Name }}-db
           image: "{{ .Values.postgres.image.registry }}/{{ .Values.postgres.image.repository }}:{{ .Values.postgres.image.tag }}"
           imagePullPolicy: {{ .Values.postgres.image.pullPolicy }}
-          name: jhaas-portal-db
+          name: {{ .Release.Name }}-db
           ports:
-            - containerPort: 5432
+            - containerPort: {{ .Values.postgres.conf.POSTGRES_PORT }}
           resources: {}
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: vol-jhaas-portal-db
-      hostname: jhaas-portal-db
+              name: vol-{{ .Release.Name }}-db
+      hostname: {{ .Release.Name }}-db
       restartPolicy: Always
       volumes:
-        - name: vol-jhaas-portal-db
+        - name: vol-{{ .Release.Name }}-db
           persistentVolumeClaim:
-            claimName: vol-jhaas-portal-db
+            claimName: vol-{{ .Release.Name }}-db
 status: {}

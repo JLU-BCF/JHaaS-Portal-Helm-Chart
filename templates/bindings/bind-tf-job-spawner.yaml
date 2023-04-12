@@ -3,12 +3,12 @@ kind: RoleBinding
 metadata:
   creationTimestamp: null
   labels:
-    jhaas-portal.binding: tf-job-spawner
-  name: bind-tf-job-spawner
+    {{ .Release.Name }}.binding: {{ .Release.Name }}-tf-job-spawner
+  name: bind-{{ .Release.Name }}-tf-job-spawner
 subjects:
 - kind: ServiceAccount
-  name: acc-tf-job-spawner
+  name: acc-{{ .Release.Name }}-tf-job-spawner
 roleRef:
-  kind: ClusterRole
-  name: role-tf-job-spawner
+  kind: Role
+  name: role-{{ .Release.Name }}-tf-job-spawner
   apiGroup: rbac.authorization.k8s.io

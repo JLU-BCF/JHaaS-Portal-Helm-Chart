@@ -3,15 +3,15 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    jhaas-portal.service: jhaas-portal-db
-  name: sv-jhaas-portal-db
+    {{ .Release.Name }}.service: {{ .Release.Name }}-db
+  name: sv-{{ .Release.Name }}-db
 spec:
   ports:
     - name: psql
-      port: 5432
-      targetPort: 5432
+      port: {{ .Values.postgres.conf.POSTGRES_PORT }}
+      targetPort: {{ .Values.postgres.conf.POSTGRES_PORT }}
       protocol: TCP
   selector:
-    jhaas-portal.service: jhaas-portal-db
+    {{ .Release.Name }}.service: {{ .Release.Name }}-db
 status:
   loadBalancer: {}

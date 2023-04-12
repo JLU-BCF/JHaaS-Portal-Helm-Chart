@@ -3,5 +3,5 @@ kind: ServiceAccount
 metadata:
   creationTimestamp: null
   labels:
-    jhaas-portal.account: tf-job-spawner
-  name: acc-tf-job-spawner
+    {{ .Release.Name }}.account: {{ .Release.Name }}-tf-job-spawner
+  name: acc-{{ .Release.Name }}-tf-job-spawner
