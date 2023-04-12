@@ -5,7 +5,6 @@ metadata:
   labels:
     jhaas-portal.binding: tf-job-spawner
   name: bind-tf-job-spawner
-  namespace: ns-tf-worker
 subjects:
 - kind: ServiceAccount
   name: acc-tf-job-spawner

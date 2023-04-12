@@ -1,7 +1,5 @@
 apiVersion: rbac.authorization.k8s.io/v1
-# Although this is a ClusterRole, it is only bound for the namespace "ns-tf-worker".
-# The service account does not get any rights on other namespaces!
-kind: ClusterRole
+kind: Role
 metadata:
   creationTimestamp: null
   labels:

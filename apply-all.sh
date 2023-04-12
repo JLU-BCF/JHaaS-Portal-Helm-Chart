@@ -15,8 +15,8 @@ else
   exit
 fi
 
-DIRS="namespaces accounts roles bindings environments secrets volumes deployments services ingresses"
+DIRS="accounts roles bindings environments secrets volumes deployments services ingresses"
 
 for DIR in $DIRS; do
-  kubectl apply -f "$DIR"
+  kubectl apply -f "templates/$DIR"
 done
