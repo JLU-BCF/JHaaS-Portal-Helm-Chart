@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  creationTimestamp: null
+  name: jhaas-portal-ingress
+  labels:
+    jhaas-portal.service: ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  # ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: sv-jhaas-portal-frontend
+      port:
+        number: 80
+  rules:
+  - http:
+      paths:
+      - path: /api/?(.*)$
+        pathType: Prefix
+        backend:
+          service:
+            name: sv-jhaas-portal-backend
+            port:
+              number: 8000

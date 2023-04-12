@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  POSTGRES_HOST: sv-jhaas-portal-db
+  POSTGRES_PORT: "5432"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    jhaas-portal.environment: jhaas-portal-db
+  name: env-jhaas-portal-db

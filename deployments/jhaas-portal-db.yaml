@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    jhaas-portal.service: jhaas-portal-db
+  name: jhaas-portal-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      jhaas-portal.service: jhaas-portal-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        jhaas-portal.service: jhaas-portal-db
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_HOST
+                  name: env-jhaas-portal-db
+            - name: POSTGRES_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_PORT
+                  name: env-jhaas-portal-db
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_DB
+                  name: sec-jhaas-portal-db
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: sec-jhaas-portal-db
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_USER
+                  name: sec-jhaas-portal-db
+          image: postgres:15
+          name: jhaas-portal-db
+          ports:
+            - containerPort: 5432
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: vol-jhaas-portal-db
+      hostname: jhaas-portal-db
+      restartPolicy: Always
+      volumes:
+        - name: vol-jhaas-portal-db
+          persistentVolumeClaim:
+            claimName: vol-jhaas-portal-db
+status: {}

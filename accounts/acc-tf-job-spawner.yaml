@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: null
+  labels:
+    jhaas-portal.account: tf-job-spawner
+  name: acc-tf-job-spawner

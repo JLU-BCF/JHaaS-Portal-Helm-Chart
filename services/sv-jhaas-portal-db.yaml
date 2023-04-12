@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    jhaas-portal.service: jhaas-portal-db
+  name: sv-jhaas-portal-db
+spec:
+  ports:
+    - name: psql
+      port: 5432
+      targetPort: 5432
+      protocol: TCP
+  selector:
+    jhaas-portal.service: jhaas-portal-db
+status:
+  loadBalancer: {}
