@@ -10,7 +10,7 @@ imageCredentials:
 backend:
   image:
     registry: harbor.computational.bio.uni-giessen.de
-    repository: bcf/jhaas_portal_backend
+    repository: bcf/jhaas-backend
     tag: master
     pullPolicy: IfNotPresent
   conf:
@@ -33,7 +33,7 @@ backend:
 frontend:
   image:
     registry: harbor.computational.bio.uni-giessen.de
-    repository: bcf/jhaas_portal_frontend
+    repository: bcf/jhaas-frontend
     tag: master
     pullPolicy: IfNotPresent
   conf:
@@ -54,6 +54,7 @@ postgres:
     POSTGRES_PASSWORD: super-secret-password-here
 
 ingress:
+  enabled: false
   className: ""
   annotations: {}
     # kubernetes.io/ingress.class: nginx
