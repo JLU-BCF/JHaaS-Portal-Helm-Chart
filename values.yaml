@@ -40,11 +40,16 @@ frontend:
     PORT: "80"
 
 postgres:
+  # "enabled" only affects the deployment of a postgres db
+  # inside the helm chart.
+  enabled: true
   image:
     registry: docker.io
     repository: postgres
     tag: "15"
     pullPolicy: IfNotPresent
+  # The "conf" object is mandatory! If no db deployed by
+  # this chart, you should enter data for an external db.
   conf:
     # Leave Host empty to use db deployed by helm
     POSTGRES_HOST:
