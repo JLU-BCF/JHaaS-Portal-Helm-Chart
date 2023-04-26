@@ -1,0 +1,68 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  labels:
+    {{ .Release.Name }}.job: {{ .Release.Name }}-db-migrator
+  name: {{ .Release.Name }}-db-migrator
+  annotations:
+    # Run this job as post-install hook!
+    "helm.sh/hook": post-install,post-upgrade
+    # TODO: cleanup in production! For now (dev), keep jobs
+    # "helm.sh/hook-delete-policy": hook-succeeded
+    "helm.sh/resource-policy": keep
+spec:
+  backoffLimit: 3
+  template:
+    metadata:
+      creationTimestamp: null
+      name: {{ .Release.Name }}-db-migrator
+      labels:
+        {{ .Release.Name }}.job: {{ .Release.Name }}-db-migrator
+    spec:
+      hostname: {{ .Release.Name }}-db-migrator
+      imagePullSecrets:
+        - name: sec-{{ .Release.Name }}-registry-credentials
+      restartPolicy: Never
+      containers:
+        - image: "{{ .Values.backend.image.registry }}/{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          name: {{ .Release.Name }}-db-migrator
+          resources: {}
+          command: ['/usr/local/bin/node', '/jhaas-app/node_modules/typeorm/cli.js', 'migration:run', '-d', '/jhaas-app/dist/config/Config.js']
+          env:
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  key: NODE_ENV
+                  name: env-{{ .Release.Name }}-backend
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: SERVER_PORT
+                  name: env-{{ .Release.Name }}-backend
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_HOST
+                  name: env-{{ .Release.Name }}-db
+            - name: POSTGRES_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_PORT
+                  name: env-{{ .Release.Name }}-db
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_DB
+                  name: sec-{{ .Release.Name }}-db
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: sec-{{ .Release.Name }}-db
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_USER
+                  name: sec-{{ .Release.Name }}-db
