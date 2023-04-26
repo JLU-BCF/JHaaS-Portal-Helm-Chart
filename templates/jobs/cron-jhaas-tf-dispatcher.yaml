@@ -1,0 +1,70 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  labels:
+    {{ .Release.Name }}.cron: {{ .Release.Name }}-tf-dispatcher
+  name: {{ .Release.Name }}-tf-dispatcher
+spec:
+  # TODO: this is testing! Use proper schedule for prod!!!
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      backoffLimit: 3
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            {{ .Release.Name }}.cron: {{ .Release.Name }}-tf-dispatcher
+        spec:
+          serviceAccountName: acc-{{ .Release.Name }}-tf-job-spawner
+          hostname: {{ .Release.Name }}-tf-dispatcher
+          imagePullSecrets:
+            - name: sec-{{ .Release.Name }}-registry-credentials
+          restartPolicy: Never
+          containers:
+            - image: "{{ .Values.backend.image.registry }}/{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+              imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+              name: {{ .Release.Name }}-tf-dispatcher
+              resources: {}
+              # TODO: this is testing! Use proper command for prod!!!
+              command: ['/usr/local/bin/node', '/jhaas-app/dist/jobs/TestDispatchWorkerJob.js']
+              env:
+                - name: NODE_ENV
+                  valueFrom:
+                    configMapKeyRef:
+                      key: NODE_ENV
+                      name: env-{{ .Release.Name }}-backend
+                - name: SERVER_PORT
+                  valueFrom:
+                    configMapKeyRef:
+                      key: SERVER_PORT
+                      name: env-{{ .Release.Name }}-backend
+                - name: POSTGRES_HOST
+                  valueFrom:
+                    configMapKeyRef:
+                      key: POSTGRES_HOST
+                      name: env-{{ .Release.Name }}-db
+                - name: POSTGRES_PORT
+                  valueFrom:
+                    configMapKeyRef:
+                      key: POSTGRES_PORT
+                      name: env-{{ .Release.Name }}-db
+                - name: POSTGRES_DB
+                  valueFrom:
+                    secretKeyRef:
+                      key: POSTGRES_DB
+                      name: sec-{{ .Release.Name }}-db
+                - name: POSTGRES_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      key: POSTGRES_PASSWORD
+                      name: sec-{{ .Release.Name }}-db
+                - name: POSTGRES_USER
+                  valueFrom:
+                    secretKeyRef:
+                      key: POSTGRES_USER
+                      name: sec-{{ .Release.Name }}-db

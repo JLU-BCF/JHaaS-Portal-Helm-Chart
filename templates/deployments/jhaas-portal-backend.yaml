@@ -65,5 +65,4 @@ spec:
         - name: sec-{{ .Release.Name }}-registry-credentials
       hostname: {{ .Release.Name }}-backend
       restartPolicy: Always
-      serviceAccountName: acc-{{ .Release.Name }}-tf-job-spawner
 status: {}
