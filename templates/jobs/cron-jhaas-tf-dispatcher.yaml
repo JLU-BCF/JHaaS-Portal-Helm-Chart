@@ -25,13 +25,27 @@ spec:
           imagePullSecrets:
             - name: sec-{{ .Release.Name }}-registry-credentials
           restartPolicy: Never
+          volumes:
+          - name: vol-{{ .Release.Name }}-s3-conf
+            secret:
+              secretName: sec-{{ .Release.Name }}-s3-conf
+          - name: vol-{{ .Release.Name }}-tf-conf
+            secret:
+              secretName: sec-{{ .Release.Name }}-tf-conf
           containers:
             - image: "{{ .Values.backend.image.registry }}/{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
               imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
               name: {{ .Release.Name }}-tf-dispatcher
               resources: {}
               # TODO: this is testing! Use proper command for prod!!!
-              command: ['/usr/local/bin/node', '/jhaas-app/dist/jobs/TestDispatchWorkerJob.js']
+              command: ['/usr/local/bin/node', '/jhaas-app/dist/jobs/ProccessRequestsJob.js']
+              volumeMounts:
+              - name: vol-{{ .Release.Name }}-s3-conf
+                mountPath: "/run/secrets/s3"
+                readOnly: true
+              - name: vol-{{ .Release.Name }}-tf-conf
+                mountPath: "/run/secrets/tf"
+                readOnly: true
               env:
                 - name: NODE_ENV
                   valueFrom:
@@ -43,6 +57,16 @@ spec:
                     configMapKeyRef:
                       key: SERVER_PORT
                       name: env-{{ .Release.Name }}-backend
+                - name: K8S_TF_IMAGE
+                  valueFrom:
+                    configMapKeyRef:
+                      key: K8S_TF_IMAGE
+                      name: env-{{ .Release.Name }}-tf-dispatcher
+                - name: K8S_TF_NS
+                  valueFrom:
+                    configMapKeyRef:
+                      key: K8S_TF_NS
+                      name: env-{{ .Release.Name }}-tf-dispatcher
                 - name: POSTGRES_HOST
                   valueFrom:
                     configMapKeyRef:

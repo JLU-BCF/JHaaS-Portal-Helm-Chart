@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  K8S_TF_IMAGE: {{ .Values.backend.conf.K8S_TF_IMAGE | quote }}
+  K8S_TF_NS: {{ .Values.backend.conf.K8S_TF_NS | quote }}
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    {{ .Release.Name }}.environment: {{ .Release.Name }}-tf-dispatcher
+  name: env-{{ .Release.Name }}-tf-dispatcher
