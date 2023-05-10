@@ -57,6 +57,11 @@ spec:
                     configMapKeyRef:
                       key: SERVER_PORT
                       name: env-{{ .Release.Name }}-backend
+                - name: RELEASE_NAME
+                  valueFrom:
+                    configMapKeyRef:
+                      key: RELEASE_NAME
+                      name: env-{{ .Release.Name }}-backend
                 - name: K8S_TF_IMAGE
                   valueFrom:
                     configMapKeyRef:
