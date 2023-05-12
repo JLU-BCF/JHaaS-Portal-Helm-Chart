@@ -57,7 +57,8 @@ postgres:
 ingress:
   enabled: false
   className: ""
-  annotations: {}
+  annotations:
+    {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
@@ -71,9 +72,14 @@ ingress:
   #      - chart-example.local
 
 s3:
-  url: "http://localhost:9000"
-  access_key: "YOUR-ACCESS-KEY"
-  secret_key: "YOUR-SECRET-KEY"
+  host: localhost
+  port: "80"
+  ssl: false
+  access_key: access
+  secret_key: secret
+  buckets:
+    tf_state: tf-state
+    jh_specs: jh-specs
 
 terraform:
   host: "localhost"

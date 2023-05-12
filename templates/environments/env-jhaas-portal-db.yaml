@@ -1,9 +1,9 @@
 apiVersion: v1
 data:
   {{- if .Values.postgres.conf.POSTGRES_HOST }}
-  POSTGRES_HOST: {{ .Values.postgres.conf.POSTGRES_HOST }}
+  POSTGRES_HOST: {{ .Values.postgres.conf.POSTGRES_HOST | quote }}
   {{- else }}
-  POSTGRES_HOST: sv-{{ .Release.Name }}-db
+  POSTGRES_HOST: "sv-{{ .Release.Name }}-db"
   {{- end }}
   POSTGRES_PORT: {{ .Values.postgres.conf.POSTGRES_PORT | quote }}
 kind: ConfigMap

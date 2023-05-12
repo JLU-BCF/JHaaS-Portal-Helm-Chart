@@ -25,13 +25,6 @@ spec:
           imagePullSecrets:
             - name: sec-{{ .Release.Name }}-registry-credentials
           restartPolicy: Never
-          volumes:
-          - name: vol-{{ .Release.Name }}-s3-conf
-            secret:
-              secretName: sec-{{ .Release.Name }}-s3-conf
-          - name: vol-{{ .Release.Name }}-tf-conf
-            secret:
-              secretName: sec-{{ .Release.Name }}-tf-conf
           containers:
             - image: "{{ .Values.backend.image.registry }}/{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
               imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
@@ -39,13 +32,6 @@ spec:
               resources: {}
               # TODO: this is testing! Use proper command for prod!!!
               command: ['/usr/local/bin/node', '/jhaas-app/dist/jobs/ProccessRequestsJob.js']
-              volumeMounts:
-              - name: vol-{{ .Release.Name }}-s3-conf
-                mountPath: "/run/secrets/s3"
-                readOnly: true
-              - name: vol-{{ .Release.Name }}-tf-conf
-                mountPath: "/run/secrets/tf"
-                readOnly: true
               env:
                 - name: NODE_ENV
                   valueFrom:
@@ -62,6 +48,7 @@ spec:
                     configMapKeyRef:
                       key: RELEASE_NAME
                       name: env-{{ .Release.Name }}-backend
+                # Kubernetes
                 - name: K8S_TF_IMAGE
                   valueFrom:
                     configMapKeyRef:
@@ -72,6 +59,44 @@ spec:
                     configMapKeyRef:
                       key: K8S_TF_NS
                       name: env-{{ .Release.Name }}-tf-dispatcher
+                # S3 Connection
+                - name: S3_ENDPOINT
+                  valueFrom:
+                    configMapKeyRef:
+                      key: S3_ENDPOINT
+                      name: env-{{ .Release.Name }}-tf-dispatcher
+                - name: S3_PORT
+                  valueFrom:
+                    configMapKeyRef:
+                      key: S3_PORT
+                      name: env-{{ .Release.Name }}-tf-dispatcher
+                - name: S3_SSL
+                  valueFrom:
+                    configMapKeyRef:
+                      key: S3_SSL
+                      name: env-{{ .Release.Name }}-tf-dispatcher
+                - name: S3_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      key: access_key
+                      name: sec-{{ .Release.Name }}-s3-conf
+                - name: S3_SECRET_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      key: secret_key
+                      name: sec-{{ .Release.Name }}-s3-conf
+                # S3 Buckets
+                - name: S3_JH_SPECS_BUCKET
+                  valueFrom:
+                    configMapKeyRef:
+                      key: S3_JH_SPECS_BUCKET
+                      name: env-{{ .Release.Name }}-tf-dispatcher
+                # Secret Names
+                - name: S3_SECRET_NAME
+                  value: sec-{{ .Release.Name }}-s3-conf
+                - name: TF_SECRET_NAME
+                  value: sec-{{ .Release.Name }}-tf-conf
+                # POSTGRES
                 - name: POSTGRES_HOST
                   valueFrom:
                     configMapKeyRef:

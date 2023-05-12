@@ -1,7 +1,14 @@
 apiVersion: v1
 data:
+  # Kubernetes
   K8S_TF_IMAGE: {{ .Values.backend.conf.K8S_TF_IMAGE | quote }}
   K8S_TF_NS: {{ .Values.backend.conf.K8S_TF_NS | quote }}
+  # S3 Connection
+  S3_ENDPOINT: {{ .Values.s3.host | quote }}
+  S3_PORT: {{ .Values.s3.port | quote }}
+  S3_SSL: {{ .Values.s3.ssl | quote }}
+  # S3 Buckets
+  S3_JH_SPECS_BUCKET: {{ .Values.s3.buckets.jh_specs | quote }}
 kind: ConfigMap
 metadata:
   creationTimestamp: null
