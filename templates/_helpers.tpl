@@ -12,7 +12,7 @@
 
 {{- define "s3Config" }}
 {{- with .Values.s3 }}
-{{- printf "{ \"aliases\": { \"s3\": { \"url\": \"%s://%s:%s\", \"accessKey\": \"%s\", \"secretKey\": \"%s\" } } }" (.ssl | ternary "https" "http") .host .port .access_key .secret_key | b64enc | quote }}
+{{- printf "{ \"aliases\": { \"s3\": { \"url\": \"%s://%s:%s\", \"accessKey\": \"%s\", \"secretKey\": \"%s\", \"api\": \"%s\" } } }" (.ssl | ternary "https" "http") .host .port .access_key .secret_key .api | b64enc | quote }}
 {{- end }}
 {{- end }}
 

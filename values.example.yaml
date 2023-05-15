@@ -77,6 +77,7 @@ s3:
   ssl: false
   access_key: access
   secret_key: secret
+  api: S3v2
   buckets:
     tf_state: tf-state
     jh_specs: jh-specs
