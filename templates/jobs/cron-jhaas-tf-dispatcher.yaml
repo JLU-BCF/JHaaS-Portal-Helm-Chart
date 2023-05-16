@@ -122,3 +122,34 @@ spec:
                     secretKeyRef:
                       key: POSTGRES_USER
                       name: sec-{{ .Release.Name }}-db
+                # Mail
+                - name: MAIL_HOST
+                  valueFrom:
+                    configMapKeyRef:
+                      key: MAIL_HOST
+                      name: env-{{ .Release.Name }}-mail
+                - name: MAIL_PORT
+                  valueFrom:
+                    configMapKeyRef:
+                      key: MAIL_PORT
+                      name: env-{{ .Release.Name }}-mail
+                - name: MAIL_SECURE
+                  valueFrom:
+                    configMapKeyRef:
+                      key: MAIL_SECURE
+                      name: env-{{ .Release.Name }}-mail
+                - name: MAIL_FROM
+                  valueFrom:
+                    configMapKeyRef:
+                      key: MAIL_FROM
+                      name: env-{{ .Release.Name }}-mail
+                - name: MAIL_FROM_NAME
+                  valueFrom:
+                    configMapKeyRef:
+                      key: MAIL_FROM_NAME
+                      name: env-{{ .Release.Name }}-mail
+                - name: MAIL_COPY_ADDRESSES
+                  valueFrom:
+                    configMapKeyRef:
+                      key: MAIL_COPY_ADDRESSES
+                      name: env-{{ .Release.Name }}-mail

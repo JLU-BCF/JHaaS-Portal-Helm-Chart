@@ -60,6 +60,14 @@ ingress:
   tls: false
     # secretName: chart-example-tls
 
+mail:
+  host: mailhog
+  port: "2525"
+  secure: false
+  from: portal@jhaas.local
+  from_name: JHaaS Portal
+  copy_addresses: "['admins@jhaas.local']"
+
 s3:
   host: localhost
   port: "80"

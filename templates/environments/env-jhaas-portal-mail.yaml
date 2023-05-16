@@ -1,0 +1,15 @@
+apiVersion: v1
+data:
+  MAIL_HOST: {{ .Values.mail.host | quote }}
+  MAIL_PORT: {{ .Values.mail.port | quote }}
+  MAIL_SECURE: {{ .Values.mail.secure | quote }}
+  MAIL_FROM: {{ .Values.mail.from | quote }}
+  MAIL_FROM_NAME: {{ .Values.mail.from_name | quote }}
+  MAIL_COPY_ADDRESSES: {{ .Values.mail.copy_addresses | quote }}
+
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    {{ .Release.Name }}.environment: {{ .Release.Name }}-mail
+  name: env-{{ .Release.Name }}-mail
