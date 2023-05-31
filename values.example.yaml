@@ -19,12 +19,10 @@ backend:
     K8S_TF_IMAGE: harbor.computational.bio.uni-giessen.de/bcf/jhaas-tf-worker:master
     K8S_TF_NS: jhaas-portal-playground
     JH_DOMAIN:
-    JWT_SECRET_A:
-    JWT_SECRET_B:
-    JWT_ACTIVE_SECRET:
-    JWT_EXPIRY:
-    JWT_REFRESH_EXPIRY:
-    JWT_REFRESH_COOKIE_SECURE:
+    FRONTEND_URL:
+    SESSION_COOKIE_SECRET: [secret1, secret2, secret3]
+    SESSION_STORAGE: redis
+    SESSION_STORAGE_URL: redis://redis
 
 frontend:
   image:
@@ -82,3 +80,9 @@ s3:
 terraform:
   host: "localhost"
   token: "aaabbbccc"
+
+oidc:
+  endpoint:
+  callback_url:
+  OIDC_CLIENT_ID:
+  OIDC_CLIENT_SECRET:

@@ -30,6 +30,46 @@ spec:
                 configMapKeyRef:
                   key: SERVER_PORT
                   name: env-{{ .Release.Name }}-backend
+            - name: FRONTEND_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: FRONTEND_URL
+                  name: env-{{ .Release.Name }}-backend
+            - name: SESSION_COOKIE_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  key: SESSION_COOKIE_SECRET
+                  name: env-{{ .Release.Name }}-backend
+            - name: SESSION_STORAGE
+              valueFrom:
+                configMapKeyRef:
+                  key: SESSION_STORAGE
+                  name: env-{{ .Release.Name }}-backend
+            - name: SESSION_STORAGE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: SESSION_STORAGE_URL
+                  name: env-{{ .Release.Name }}-backend
+            - name: OIDC_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: OIDC_ENDPOINT
+                  name: env-{{ .Release.Name }}-backend
+            - name: OIDC_URL_CALLBACK
+              valueFrom:
+                configMapKeyRef:
+                  key: OIDC_URL_CALLBACK
+                  name: env-{{ .Release.Name }}-backend
+            - name: OIDC_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: OIDC_CLIENT_ID
+                  name: env-{{ .Release.Name }}-backend
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  key: OIDC_CLIENT_SECRET
+                  name: env-{{ .Release.Name }}-backend
             - name: RELEASE_NAME
               valueFrom:
                 configMapKeyRef:
