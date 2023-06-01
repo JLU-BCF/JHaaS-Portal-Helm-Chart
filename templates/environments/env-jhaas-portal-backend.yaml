@@ -11,6 +11,9 @@ data:
   OIDC_URL_CALLBACK: {{ .Values.oidc.callback_url | quote }}
   OIDC_CLIENT_ID: {{ .Values.oidc.client_id | quote }}
   OIDC_CLIENT_SECRET: {{ .Values.oidc.client_secret | quote }}
+  AUTHENTIK_API_ENDPOINT: {{ .Values.authentik.api_endpoint | quote }}
+  AUTHENTIK_API_SECRET: {{ .Values.authentik.api_secret | quote }}
+  AUTHENTIK_JH_GROUP_NAME: {{ .Values.authentik.jupyter_hub_group | quote }}
 kind: ConfigMap
 metadata:
   creationTimestamp: null

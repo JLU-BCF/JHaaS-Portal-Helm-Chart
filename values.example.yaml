@@ -84,5 +84,10 @@ terraform:
 oidc:
   endpoint:
   callback_url:
-  OIDC_CLIENT_ID:
-  OIDC_CLIENT_SECRET:
+  client_id:
+  client_secret:
+
+authentik:
+  api_endpoint:
+  api_secret:
+  jupyter_hub_group:

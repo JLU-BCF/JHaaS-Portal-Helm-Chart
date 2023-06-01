@@ -70,6 +70,21 @@ spec:
                 configMapKeyRef:
                   key: OIDC_CLIENT_SECRET
                   name: env-{{ .Release.Name }}-backend
+            - name: AUTHENTIK_API_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTHENTIK_API_ENDPOINT
+                  name: env-{{ .Release.Name }}-backend
+            - name: AUTHENTIK_API_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTHENTIK_API_SECRET
+                  name: env-{{ .Release.Name }}-backend
+            - name: AUTHENTIK_JH_GROUP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTHENTIK_JH_GROUP_NAME
+                  name: env-{{ .Release.Name }}-backend
             - name: RELEASE_NAME
               valueFrom:
                 configMapKeyRef:
