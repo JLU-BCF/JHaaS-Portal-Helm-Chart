@@ -2,6 +2,10 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+jhaas:
+  domain:
+  issuer:
+
 imageCredentials:
   registry: harbor.computational.bio.uni-giessen.de
   username:
@@ -88,6 +92,9 @@ oidc:
   client_secret:
 
 authentik:
+  url:
   api_endpoint:
   api_secret:
   jupyter_hub_group:
+  authentication_flow:
+  authorization_flow:
