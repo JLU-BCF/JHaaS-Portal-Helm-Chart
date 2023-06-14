@@ -59,6 +59,7 @@ postgres:
 ingress:
   enabled: false
   host: jhaas.local
+  issuer: false
   tls: false
     # secretName: chart-example-tls
 
