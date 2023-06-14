@@ -14,6 +14,7 @@ data:
   AUTHENTIK_API_ENDPOINT: {{ .Values.authentik.api_endpoint | quote }}
   AUTHENTIK_API_SECRET: {{ .Values.authentik.api_secret | quote }}
   AUTHENTIK_JH_GROUP_NAME: {{ .Values.authentik.jupyter_hub_group | quote }}
+  JHAAS_DOMAIN: {{ .Values.jhaas.domain | quote }}
 kind: ConfigMap
 metadata:
   creationTimestamp: null

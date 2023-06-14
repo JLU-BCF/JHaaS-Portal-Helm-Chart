@@ -90,6 +90,11 @@ spec:
                 configMapKeyRef:
                   key: RELEASE_NAME
                   name: env-{{ .Release.Name }}-backend
+            - name: JHAAS_DOMAIN
+              valueFrom:
+                configMapKeyRef:
+                  key: JHAAS_DOMAIN
+                  name: env-{{ .Release.Name }}-backend
             - name: POSTGRES_HOST
               valueFrom:
                 configMapKeyRef:

@@ -48,6 +48,21 @@ spec:
                     configMapKeyRef:
                       key: RELEASE_NAME
                       name: env-{{ .Release.Name }}-backend
+                - name: JHAAS_DOMAIN
+                  valueFrom:
+                    configMapKeyRef:
+                      key: JHAAS_DOMAIN
+                      name: env-{{ .Release.Name }}-backend
+                - name: AUTHENTIK_API_ENDPOINT
+                  valueFrom:
+                    configMapKeyRef:
+                      key: AUTHENTIK_API_ENDPOINT
+                      name: env-{{ .Release.Name }}-backend
+                - name: AUTHENTIK_API_SECRET
+                  valueFrom:
+                    configMapKeyRef:
+                      key: AUTHENTIK_API_SECRET
+                      name: env-{{ .Release.Name }}-backend
                 # Kubernetes
                 - name: K8S_TF_IMAGE
                   valueFrom:
