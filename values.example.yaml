@@ -5,6 +5,7 @@
 jhaas:
   domain:
   issuer:
+  icon:
 
 imageCredentials:
   registry: harbor.computational.bio.uni-giessen.de

@@ -2,6 +2,7 @@ apiVersion: v1
 data:
   JHAAS_DOMAIN: {{ .Values.jhaas.domain | quote }}
   JHAAS_ISSUER: {{ .Values.jhaas.issuer | quote }}
+  JHAAS_ICON: {{ .Values.jhaas.icon | quote }}
   JHAAS_AUTHENTIK_URL: {{ .Values.authentik.url | quote }}
   JHAAS_AUTHENTIK_TOKEN: {{ .Values.authentik.api_secret | quote }}
   JHAAS_AUTHENTICATION_FLOW: {{ .Values.authentik.authentication_flow | quote }}
