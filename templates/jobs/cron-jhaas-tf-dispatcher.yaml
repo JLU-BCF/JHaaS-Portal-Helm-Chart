@@ -69,6 +69,11 @@ spec:
                     configMapKeyRef:
                       key: K8S_TF_IMAGE
                       name: env-{{ .Release.Name }}-tf-dispatcher
+                - name: K8S_TF_IMAGE_PP
+                  valueFrom:
+                    configMapKeyRef:
+                      key: K8S_TF_IMAGE_PP
+                      name: env-{{ .Release.Name }}-tf-dispatcher
                 - name: K8S_TF_NS
                   valueFrom:
                     configMapKeyRef:

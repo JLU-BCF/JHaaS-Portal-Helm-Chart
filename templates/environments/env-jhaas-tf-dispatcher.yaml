@@ -2,6 +2,7 @@ apiVersion: v1
 data:
   # Kubernetes
   K8S_TF_IMAGE: {{ .Values.backend.conf.K8S_TF_IMAGE | quote }}
+  K8S_TF_IMAGE_PP: {{ .Values.backend.conf.K8S_TF_IMAGE_PP | quote }}
   K8S_TF_NS: {{ .Values.backend.conf.K8S_TF_NS | quote }}
   # S3 Connection
   S3_ENDPOINT: {{ .Values.s3.host | quote }}

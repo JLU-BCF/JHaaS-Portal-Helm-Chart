@@ -22,6 +22,7 @@ backend:
     NODE_ENV: production
     PORT: "8000"
     K8S_TF_IMAGE: harbor.computational.bio.uni-giessen.de/bcf/jhaas-tf-worker:master
+    K8S_TF_IMAGE_PP: IfNotPresent
     K8S_TF_NS: jhaas-portal-playground
     JH_DOMAIN:
     FRONTEND_URL:
