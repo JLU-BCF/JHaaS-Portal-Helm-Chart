@@ -65,11 +65,12 @@ redis:
   imagePullPolicy: IfNotPresent
 
 ingress:
-  enabled: false
+  enabled: true
   host: jhaas.local
-  issuer: false
-  tls: false
-    # secretName: chart-example-tls
+  tls:
+    enabled: false
+    issuer: false
+    secretName: false
 
 mail:
   host: mailhog

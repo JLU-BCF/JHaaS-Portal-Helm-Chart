@@ -9,15 +9,19 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /$1
-    {{- if .Values.ingress.issuer  }}
-    cert-manager.io/cluster-issuer: {{ .Values.ingress.issuer }}
+    {{- if .Values.ingress.tls.issuer  }}
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.tls.issuer }}
     {{- end }}
 spec:
-  {{- if .Values.ingress.tls }}
+  {{- if .Values.ingress.tls.enabled }}
   tls:
     - hosts:
       - {{ .Values.ingress.host }}
-      secretName: {{ .Release.Name }}-{{ .Values.ingress.tls.secretName }}
+      {{- if .Values.ingress.tls.secretName }}
+      secretName: {{ .Values.ingress.tls.secretName }}
+      {{- else }}
+      secretName: sec-{{ .Release.Name }}-tls
+      {{- end }}
   {{- end }}
 
   rules:
