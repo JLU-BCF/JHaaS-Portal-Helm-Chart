@@ -5,7 +5,11 @@ data:
   FRONTEND_URL: {{ .Values.backend.conf.FRONTEND_URL | quote }}
   SESSION_COOKIE_SECRET: {{ .Values.backend.conf.SESSION_COOKIE_SECRET | toJson | quote }}
   SESSION_STORAGE: {{ .Values.backend.conf.SESSION_STORAGE | quote }}
+  {{- if .Values.redis.enabled }}
+  SESSION_STORAGE_URL: "redis://sv-{{ .Release.Name }}-redis:{{ .Values.redis.port }}"
+  {{- else }}
   SESSION_STORAGE_URL: {{ .Values.backend.conf.SESSION_STORAGE_URL | quote }}
+  {{- end }}
   RELEASE_NAME: {{ .Release.Name | quote }}
   OIDC_ENDPOINT: {{ .Values.oidc.endpoint | quote }}
   OIDC_URL_CALLBACK: {{ .Values.oidc.callback_url | quote }}

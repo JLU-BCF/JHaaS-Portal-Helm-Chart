@@ -58,6 +58,12 @@ postgres:
     POSTGRES_USER: jhaas-portal
     POSTGRES_PASSWORD: super-secret-password-here
 
+redis:
+  enabled: true
+  port: '6379'
+  image: docker.io/library/redis:alpine3.18
+  imagePullPolicy: IfNotPresent
+
 ingress:
   enabled: false
   host: jhaas.local

@@ -1,0 +1,16 @@
+{{ if .Values.redis.enabled -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    {{ .Release.Name }}.volume: {{ .Release.Name }}-redis
+  name: vol-{{ .Release.Name }}-redis
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+{{- end }}

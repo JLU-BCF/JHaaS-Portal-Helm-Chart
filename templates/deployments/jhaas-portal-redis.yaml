@@ -1,0 +1,39 @@
+{{ if .Values.redis.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    {{ .Release.Name }}.service: {{ .Release.Name }}-redis
+  name: {{ .Release.Name }}-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{ .Release.Name }}.service: {{ .Release.Name }}-redis
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        {{ .Release.Name }}.service: {{ .Release.Name }}-redis
+    spec:
+      containers:
+        - image: {{ .Values.redis.image }}
+          imagePullPolicy: {{ .Values.redis.imagePullPolicy }}
+          name: {{ .Release.Name }}-redis
+          ports:
+            - containerPort: {{ .Values.redis.port }}
+          resources: {}
+          volumeMounts:
+            - mountPath: /data
+              name: vol-{{ .Release.Name }}-redis
+      hostname: {{ .Release.Name }}-redis
+      restartPolicy: Always
+      volumes:
+        - name: vol-{{ .Release.Name }}-redis
+          persistentVolumeClaim:
+            claimName: vol-{{ .Release.Name }}-redis
+status: {}
+{{- end }}
