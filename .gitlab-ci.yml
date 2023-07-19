@@ -28,4 +28,4 @@ helm-package:
     - 'curl --request "POST"
       --user "$HARBOR_USERNAME:$HARBOR_PASSWORD"
       --upload-file "/tmp/${HELM_CHART_NAME}-${HELM_CHART_CHANNEL}-${HELM_CHART_VERSION}.tgz"
-      "$HARBOR_URL/repository/$HARBOR_PROJECT/$CI_PROJECT_NAME:$CI_COMMIT_REF_SLUG/"'
+      "$HARBOR_URL/api/chartrepo/$HARBOR_PROJECT/charts"'
