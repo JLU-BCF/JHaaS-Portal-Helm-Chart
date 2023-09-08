@@ -3,6 +3,7 @@
 # Declare variables to be passed into your templates.
 
 jhaas:
+  create_kubeconf_secret: false
   domain:
   issuer:
   icon:
