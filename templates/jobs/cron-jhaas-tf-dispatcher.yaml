@@ -111,6 +111,11 @@ spec:
                     configMapKeyRef:
                       key: S3_JH_SPECS_BUCKET
                       name: env-{{ .Release.Name }}-tf-dispatcher
+                - name: S3_TF_STATE_BUCKET
+                  valueFrom:
+                    configMapKeyRef:
+                      key: S3_TF_STATE_BUCKET
+                      name: env-{{ .Release.Name }}-tf-dispatcher
                 # Secret Names
                 - name: S3_SECRET_NAME
                   value: sec-{{ .Release.Name }}-s3-conf

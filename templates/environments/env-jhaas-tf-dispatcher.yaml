@@ -9,6 +9,7 @@ data:
   S3_PORT: {{ .Values.s3.port | quote }}
   S3_SSL: {{ .Values.s3.ssl | quote }}
   # S3 Buckets
+  S3_TF_STATE_BUCKET: {{ .Values.s3.buckets.tf_state | quote }}
   S3_JH_SPECS_BUCKET: {{ .Values.s3.buckets.jh_specs | quote }}
 kind: ConfigMap
 metadata:
