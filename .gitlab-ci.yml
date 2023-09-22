@@ -36,7 +36,7 @@ helm-package:
 
 
     # Push chart to GitLab
-    - helm push "/tmp/${HELM_CHART_NAME}-${HELM_CHART_CHANNEL}-${HELM_CHART_VERSION}.tgz" "$CI_REGISTRY/$CI_PROJECT_PATH"
+    - helm push "/tmp/${HELM_CHART_NAME}-${HELM_CHART_CHANNEL}-${HELM_CHART_VERSION}.tgz" "oci://$CI_REGISTRY/$CI_PROJECT_PATH"
 
 
     # Push chart to harbor
