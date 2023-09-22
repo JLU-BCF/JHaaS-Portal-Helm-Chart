@@ -11,8 +11,14 @@ helm-package:
   stage: package
   image: alpine:3.18
   script:
-    - apk add --no-cache curl
+    - apk add --no-cache curl helm
     - cp values.example.yaml values.yaml
+    - mkdir -p /root/.config/helm/registry
+
+    # Setup Secrets
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"},\"$HARBOR_HOST\":{\"username\":\"$HARBOR_USERNAME\",\"password\":\"$HARBOR_PASSWORD\"}}}" > /root/.config/helm/registry/config.json
+
+    # Package Helm Chart
     - tar -vczf /tmp/${HELM_CHART_NAME}-${HELM_CHART_CHANNEL}-${HELM_CHART_VERSION}.tgz
       -C ${HELM_CHART_DIR}
       --exclude=./.git
@@ -21,11 +27,12 @@ helm-package:
       --exclude=./.helmignore
       --exclude=./values.example.yaml
       .
+
+    # Push chart to GitLab
     - 'curl --request "POST"
       --user "gitlab-ci-token:$CI_JOB_TOKEN"
       --form "chart=@/tmp/${HELM_CHART_NAME}-${HELM_CHART_CHANNEL}-${HELM_CHART_VERSION}.tgz"
       "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/helm/api/${HELM_CHART_CHANNEL}/charts"'
-    - 'curl --request "POST"
-      --user "$HARBOR_USERNAME:$HARBOR_PASSWORD"
-      --upload-file "/tmp/${HELM_CHART_NAME}-${HELM_CHART_CHANNEL}-${HELM_CHART_VERSION}.tgz"
-      "$HARBOR_URL/api/chartrepo/$HARBOR_PROJECT/charts"'
+
+    # Push chart to harbor
+    - helm push "/tmp/${HELM_CHART_NAME}-${HELM_CHART_CHANNEL}-${HELM_CHART_VERSION}.tgz" "$HARBOR_OCI/$HARBOR_PROJECT"
