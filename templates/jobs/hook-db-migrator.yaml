@@ -21,11 +21,15 @@ spec:
         {{ .Release.Name }}.job: {{ .Release.Name }}-db-migrator
     spec:
       hostname: {{ .Release.Name }}-db-migrator
+      {{- if .Values.imageCredentials }}
       imagePullSecrets:
-        - name: sec-{{ .Release.Name }}-registry-credentials
+        {{- range .Values.imageCredentials }}
+        - name: sec-{{ $.Release.Name }}-{{ .name }}-registry-credentials
+        {{- end }}
+      {{- end }}
       restartPolicy: Never
       containers:
-        - image: "{{ .Values.backend.image.registry }}/{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+        - image: {{ .Values.backend.image.name }}
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           name: {{ .Release.Name }}-db-migrator
           resources: {}

@@ -8,16 +8,15 @@ jhaas:
   issuer:
   icon:
 
-imageCredentials:
-  registry: harbor.computational.bio.uni-giessen.de
-  username:
-  password:
+imageCredentials: []
+  # - name:
+  #   registry:
+  #   username:
+  #   password:
 
 backend:
   image:
-    registry: harbor.computational.bio.uni-giessen.de
-    repository: bcf/jhaas-backend
-    tag: master
+    name: harbor.computational.bio.uni-giessen.de/bcf/portal-backend:master
     pullPolicy: IfNotPresent
   conf:
     NODE_ENV: production
@@ -33,9 +32,7 @@ backend:
 
 frontend:
   image:
-    registry: harbor.computational.bio.uni-giessen.de
-    repository: bcf/jhaas-frontend
-    tag: master
+    name: harbor.computational.bio.uni-giessen.de/bcf/portal-frontend:master
     pullPolicy: IfNotPresent
   conf:
     PORT: "80"
@@ -45,9 +42,7 @@ postgres:
   # inside the helm chart.
   enabled: true
   image:
-    registry: docker.io
-    repository: postgres
-    tag: "15"
+    name: docker.io/postgres:15
     pullPolicy: IfNotPresent
   # The "conf" object is mandatory! If no db deployed by
   # this chart, you should enter data for an external db.

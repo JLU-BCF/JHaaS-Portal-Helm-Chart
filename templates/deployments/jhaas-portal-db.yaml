@@ -46,7 +46,7 @@ spec:
                 secretKeyRef:
                   key: POSTGRES_USER
                   name: sec-{{ .Release.Name }}-db
-          image: "{{ .Values.postgres.image.registry }}/{{ .Values.postgres.image.repository }}:{{ .Values.postgres.image.tag }}"
+          image: {{ .Values.postgres.image.name }}
           imagePullPolicy: {{ .Values.postgres.image.pullPolicy }}
           name: {{ .Release.Name }}-db
           ports:

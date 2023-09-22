@@ -19,14 +19,18 @@ spec:
         {{ .Release.Name }}.service: {{ .Release.Name }}-frontend
     spec:
       containers:
-        - image: "{{ .Values.frontend.image.registry }}/{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
+        - image: {{ .Values.frontend.image.name }}
           imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
           name: {{ .Release.Name }}-frontend
           ports:
             - containerPort: {{ .Values.frontend.conf.PORT }}
           resources: {}
+      {{- if .Values.imageCredentials }}
       imagePullSecrets:
-        - name: sec-{{ .Release.Name }}-registry-credentials
+        {{- range .Values.imageCredentials }}
+        - name: sec-{{ $.Release.Name }}-{{ .name }}-registry-credentials
+        {{- end }}
+      {{- end }}
       hostname: {{ .Release.Name }}-frontend
       restartPolicy: Always
 status: {}
