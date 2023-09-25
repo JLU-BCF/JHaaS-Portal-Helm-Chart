@@ -6,10 +6,10 @@ data:
   JHAAS_DOMAIN: {{ .Values.jhaas.domain | quote }}
   RELEASE_NAME: {{ .Release.Name | quote }}
 
-  SESSION_COOKIE_NAME: {{ .Values.backend.SESSION_COOKIE_NAME | quote }}
-  SESSION_COOKIE_PATH: {{ .Values.backend.SESSION_COOKIE_PATH | quote }}
-  SESSION_COOKIE_MAX_AGE: {{ .Values.backend.SESSION_COOKIE_MAX_AGE | quote }}
-  SESSION_COOKIE_SECURE: {{ .Values.backend.SESSION_COOKIE_SECURE | quote }}
+  SESSION_COOKIE_NAME: {{ .Values.backend.conf.SESSION_COOKIE_NAME | quote }}
+  SESSION_COOKIE_PATH: {{ .Values.backend.conf.SESSION_COOKIE_PATH | quote }}
+  SESSION_COOKIE_MAX_AGE: {{ .Values.backend.conf.SESSION_COOKIE_MAX_AGE | quote }}
+  SESSION_COOKIE_SECURE: {{ .Values.backend.conf.SESSION_COOKIE_SECURE | quote }}
   SESSION_COOKIE_SECRET: {{ .Values.backend.conf.SESSION_COOKIE_SECRET | toJson | quote }}
   SESSION_STORAGE: {{ .Values.backend.conf.SESSION_STORAGE | quote }}
   {{- if .Values.redis.enabled }}
@@ -17,7 +17,7 @@ data:
   {{- else }}
   SESSION_STORAGE_URL: {{ .Values.backend.conf.SESSION_STORAGE_URL | quote }}
   {{- end }}
-  SESSION_STORAGE_PREFIX: {{ .Values.backend.SESSION_STORAGE_PREFIX | quote }}
+  SESSION_STORAGE_PREFIX: {{ .Values.backend.conf.SESSION_STORAGE_PREFIX | quote }}
 
   OIDC_ENDPOINT: {{ .Values.oidc.endpoint | quote }}
   OIDC_URL_CALLBACK: {{ .Values.oidc.callback_url | quote }}
