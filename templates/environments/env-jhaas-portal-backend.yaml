@@ -23,15 +23,15 @@ data:
   OIDC_URL_CALLBACK: {{ .Values.oidc.callback_url | quote }}
   OIDC_CLIENT_ID: {{ .Values.oidc.client_id | quote }}
   OIDC_CLIENT_SECRET: {{ .Values.oidc.client_secret | quote }}
-  OIDC_FORCE_REACHABILITY: {{ .Values.oidc.force_reachability }}
+  OIDC_FORCE_REACHABILITY: {{ .Values.oidc.force_reachability | quote }}
 
-  AUTHENTIK_NAME: {{ .Values.authentik.name }}
-  AUTHENTIK_FQDN: {{ .Values.authentik.fqdn }}
-  AUTHENTIK_URL: {{ .Values.authentik.url }}
+  AUTHENTIK_NAME: {{ .Values.authentik.name | quote }}
+  AUTHENTIK_FQDN: {{ .Values.authentik.fqdn | quote }}
+  AUTHENTIK_URL: {{ .Values.authentik.url | quote }}
   AUTHENTIK_API_ENDPOINT: {{ .Values.authentik.api_endpoint | quote }}
   AUTHENTIK_API_SECRET: {{ .Values.authentik.api_secret | quote }}
   AUTHENTIK_JH_GROUP_NAME: {{ .Values.authentik.jupyter_hub_group | quote }}
-  AUTHENTIK_INVALIDATION_FLOW: {{ .Values.authentik.invalidation_flow }}
+  AUTHENTIK_INVALIDATION_FLOW: {{ .Values.authentik.invalidation_flow | quote }}
 
   TYPEORM_DB_SYNC: {{ .Values.backend.conf.TYPEORM_DB_SYNC | quote }}
   TYPEORM_DB_LOGGING: {{ .Values.backend.conf.TYPEORM_DB_LOGGING | quote }}
