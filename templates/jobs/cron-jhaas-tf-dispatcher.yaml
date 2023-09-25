@@ -67,6 +67,16 @@ spec:
                     configMapKeyRef:
                       key: AUTHENTIK_API_SECRET
                       name: env-{{ .Release.Name }}-backend
+                - name: TYPEORM_DB_SYNC
+                  valueFrom:
+                    configMapKeyRef:
+                      key: TYPEORM_DB_SYNC
+                      name: env-{{ .Release.Name }}-backend
+                - name: TYPEORM_DB_LOGGING
+                  valueFrom:
+                    configMapKeyRef:
+                      key: TYPEORM_DB_LOGGING
+                      name: env-{{ .Release.Name }}-backend
                 # Kubernetes
                 - name: K8S_TF_IMAGE
                   valueFrom:

@@ -6,6 +6,7 @@ data:
   MAIL_FROM: {{ .Values.mail.from | quote }}
   MAIL_FROM_NAME: {{ .Values.mail.from_name | quote }}
   MAIL_COPY_ADDRESSES: {{ .Values.mail.copy_addresses | quote }}
+  MAIL_FEEDBACK_ADDRESS: {{ .Values.mail.feedback_address }}
 
 kind: ConfigMap
 metadata:

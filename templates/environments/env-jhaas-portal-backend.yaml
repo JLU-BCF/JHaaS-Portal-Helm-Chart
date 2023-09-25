@@ -3,6 +3,13 @@ data:
   NODE_ENV: {{ .Values.backend.conf.NODE_ENV | quote }}
   APP_PORT: {{ .Values.backend.conf.PORT | quote }}
   FRONTEND_URL: {{ .Values.backend.conf.FRONTEND_URL | quote }}
+  JHAAS_DOMAIN: {{ .Values.jhaas.domain | quote }}
+  RELEASE_NAME: {{ .Release.Name | quote }}
+
+  SESSION_COOKIE_NAME: {{ .Values.backend.SESSION_COOKIE_NAME | quote }}
+  SESSION_COOKIE_PATH: {{ .Values.backend.SESSION_COOKIE_PATH | quote }}
+  SESSION_COOKIE_MAX_AGE: {{ .Values.backend.SESSION_COOKIE_MAX_AGE | quote }}
+  SESSION_COOKIE_SECURE: {{ .Values.backend.SESSION_COOKIE_SECURE | quote }}
   SESSION_COOKIE_SECRET: {{ .Values.backend.conf.SESSION_COOKIE_SECRET | toJson | quote }}
   SESSION_STORAGE: {{ .Values.backend.conf.SESSION_STORAGE | quote }}
   {{- if .Values.redis.enabled }}
@@ -10,15 +17,24 @@ data:
   {{- else }}
   SESSION_STORAGE_URL: {{ .Values.backend.conf.SESSION_STORAGE_URL | quote }}
   {{- end }}
-  RELEASE_NAME: {{ .Release.Name | quote }}
+  SESSION_STORAGE_PREFIX: {{ .Values.backend.SESSION_STORAGE_PREFIX | quote }}
+
   OIDC_ENDPOINT: {{ .Values.oidc.endpoint | quote }}
   OIDC_URL_CALLBACK: {{ .Values.oidc.callback_url | quote }}
   OIDC_CLIENT_ID: {{ .Values.oidc.client_id | quote }}
   OIDC_CLIENT_SECRET: {{ .Values.oidc.client_secret | quote }}
+  OIDC_FORCE_REACHABILITY: {{ .Values.oidc.force_reachability }}
+
+  AUTHENTIK_NAME: {{ .Values.authentik.name }}
+  AUTHENTIK_FQDN: {{ .Values.authentik.fqdn }}
+  AUTHENTIK_URL: {{ .Values.authentik.url }}
   AUTHENTIK_API_ENDPOINT: {{ .Values.authentik.api_endpoint | quote }}
   AUTHENTIK_API_SECRET: {{ .Values.authentik.api_secret | quote }}
   AUTHENTIK_JH_GROUP_NAME: {{ .Values.authentik.jupyter_hub_group | quote }}
-  JHAAS_DOMAIN: {{ .Values.jhaas.domain | quote }}
+  AUTHENTIK_INVALIDATION_FLOW: {{ .Values.authentik.invalidation_flow }}
+
+  TYPEORM_DB_SYNC: {{ .Values.backend.conf.TYPEORM_DB_SYNC | quote }}
+  TYPEORM_DB_LOGGING: {{ .Values.backend.conf.TYPEORM_DB_LOGGING | quote }}
 kind: ConfigMap
 metadata:
   creationTimestamp: null

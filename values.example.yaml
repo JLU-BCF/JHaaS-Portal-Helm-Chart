@@ -26,9 +26,16 @@ backend:
     K8S_TF_NS: jhaas-portal-playground
     JH_DOMAIN:
     FRONTEND_URL:
+    SESSION_COOKIE_NAME: 'session'
+    SESSION_COOKIE_PATH: '/'
+    SESSION_COOKIE_MAX_AGE: '28800000'
+    SESSION_COOKIE_SECURE: true
     SESSION_COOKIE_SECRET: [secret1, secret2, secret3]
     SESSION_STORAGE: redis
     SESSION_STORAGE_URL: redis://redis
+    SESSION_STORAGE_PREFIX:
+    TYPEORM_DB_SYNC: false
+    TYPEORM_DB_LOGGING: false
 
 frontend:
   image:
@@ -75,6 +82,7 @@ mail:
   from: portal@jhaas.local
   from_name: JHaaS Portal
   copy_addresses: "['admins@jhaas.local']"
+  feedback_address: "feedback@jhaas.local"
 
 s3:
   host: localhost
@@ -96,11 +104,15 @@ oidc:
   callback_url:
   client_id:
   client_secret:
+  force_reachability:
 
 authentik:
+  name: "Authentik"
+  fqdn:
   url:
   api_endpoint:
   api_secret:
   jupyter_hub_group:
   authentication_flow:
   authorization_flow:
+  invalidation_flow:

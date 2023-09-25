@@ -35,6 +35,26 @@ spec:
                 configMapKeyRef:
                   key: FRONTEND_URL
                   name: env-{{ .Release.Name }}-backend
+            - name: SESSION_COOKIE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: SESSION_COOKIE_NAME
+                  name: env-{{ .Release.Name }}-backend
+            - name: SESSION_COOKIE_PATH
+              valueFrom:
+                configMapKeyRef:
+                  key: SESSION_COOKIE_PATH
+                  name: env-{{ .Release.Name }}-backend
+            - name: SESSION_COOKIE_MAX_AGE
+              valueFrom:
+                configMapKeyRef:
+                  key: SESSION_COOKIE_MAX_AGE
+                  name: env-{{ .Release.Name }}-backend
+            - name: SESSION_COOKIE_SECURE
+              valueFrom:
+                configMapKeyRef:
+                  key: SESSION_COOKIE_SECURE
+                  name: env-{{ .Release.Name }}-backend
             - name: SESSION_COOKIE_SECRET
               valueFrom:
                 configMapKeyRef:
@@ -49,6 +69,11 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: SESSION_STORAGE_URL
+                  name: env-{{ .Release.Name }}-backend
+            - name: SESSION_STORAGE_PREFIX
+              valueFrom:
+                configMapKeyRef:
+                  key: SESSION_STORAGE_PREFIX
                   name: env-{{ .Release.Name }}-backend
             - name: OIDC_ENDPOINT
               valueFrom:
@@ -70,6 +95,26 @@ spec:
                 configMapKeyRef:
                   key: OIDC_CLIENT_SECRET
                   name: env-{{ .Release.Name }}-backend
+            - name: OIDC_FORCE_REACHABILITY
+              valueFrom:
+                configMapKeyRef:
+                  key: OIDC_FORCE_REACHABILITY
+                  name: env-{{ .Release.Name }}-backend
+            - name: AUTHENTIK_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTHENTIK_NAME
+                  name: env-{{ .Release.Name }}-backend
+            - name: AUTHENTIK_FQDN
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTHENTIK_FQDN
+                  name: env-{{ .Release.Name }}-backend
+            - name: AUTHENTIK_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTHENTIK_URL
+                  name: env-{{ .Release.Name }}-backend
             - name: AUTHENTIK_API_ENDPOINT
               valueFrom:
                 configMapKeyRef:
@@ -85,6 +130,11 @@ spec:
                 configMapKeyRef:
                   key: AUTHENTIK_JH_GROUP_NAME
                   name: env-{{ .Release.Name }}-backend
+            - name: AUTHENTIK_INVALIDATION_FLOW
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTHENTIK_INVALIDATION_FLOW
+                  name: env-{{ .Release.Name }}-backend
             - name: RELEASE_NAME
               valueFrom:
                 configMapKeyRef:
@@ -94,6 +144,16 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: JHAAS_DOMAIN
+                  name: env-{{ .Release.Name }}-backend
+            - name: TYPEORM_DB_SYNC
+              valueFrom:
+                configMapKeyRef:
+                  key: TYPEORM_DB_SYNC
+                  name: env-{{ .Release.Name }}-backend
+            - name: TYPEORM_DB_LOGGING
+              valueFrom:
+                configMapKeyRef:
+                  key: TYPEORM_DB_LOGGING
                   name: env-{{ .Release.Name }}-backend
             - name: POSTGRES_HOST
               valueFrom:
@@ -149,6 +209,11 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: MAIL_COPY_ADDRESSES
+                  name: env-{{ .Release.Name }}-mail
+            - name: MAIL_FEEDBACK_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: MAIL_FEEDBACK_ADDRESS
                   name: env-{{ .Release.Name }}-mail
           image: {{ .Values.backend.image.name }}
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
