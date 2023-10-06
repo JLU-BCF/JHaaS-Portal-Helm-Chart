@@ -3,6 +3,9 @@ data:
   NODE_ENV: {{ .Values.backend.conf.NODE_ENV | quote }}
   APP_PORT: {{ .Values.backend.conf.PORT | quote }}
   FRONTEND_URL: {{ .Values.backend.conf.FRONTEND_URL | quote }}
+  DOCS_ADDRESS: {{ .Values.backend.conf.DOCS_ADDRESS | quote }}
+  BRANDING_ADDRESS: {{ .Values.backend.conf.BRANDING_ADDRESS | quote }}
+  LEGAL_ADDRESS: {{ .Values.backend.conf.LEGAL_ADDRESS | quote }}
   JHAAS_DOMAIN: {{ .Values.jhaas.domain | quote }}
   RELEASE_NAME: {{ .Release.Name | quote }}
 

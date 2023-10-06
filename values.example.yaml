@@ -26,6 +26,9 @@ backend:
     K8S_TF_NS: jhaas-portal-playground
     JH_DOMAIN:
     FRONTEND_URL:
+    DOCS_ADDRESS:
+    BRANDING_ADDRESS:
+    LEGAL_ADDRESS:
     SESSION_COOKIE_NAME: 'session'
     SESSION_COOKIE_PATH: '/'
     SESSION_COOKIE_MAX_AGE: '28800000'

@@ -35,6 +35,21 @@ spec:
                 configMapKeyRef:
                   key: FRONTEND_URL
                   name: env-{{ .Release.Name }}-backend
+            - name: DOCS_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: DOCS_ADDRESS
+                  name: env-{{ .Release.Name }}-backend
+            - name: BRANDING_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: BRANDING_ADDRESS
+                  name: env-{{ .Release.Name }}-backend
+            - name: LEGAL_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: LEGAL_ADDRESS
+                  name: env-{{ .Release.Name }}-backend
             - name: SESSION_COOKIE_NAME
               valueFrom:
                 configMapKeyRef:
