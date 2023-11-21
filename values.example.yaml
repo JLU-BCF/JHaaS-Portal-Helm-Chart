@@ -119,3 +119,7 @@ authentik:
   authentication_flow:
   authorization_flow:
   invalidation_flow:
+  config_totp:
+  config_webauthn:
+  config_static:
+  config_password:

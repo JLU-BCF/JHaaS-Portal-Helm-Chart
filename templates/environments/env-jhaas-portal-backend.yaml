@@ -36,6 +36,11 @@ data:
   AUTHENTIK_JH_GROUP_NAME: {{ .Values.authentik.jupyter_hub_group | quote }}
   AUTHENTIK_INVALIDATION_FLOW: {{ .Values.authentik.invalidation_flow | quote }}
 
+  AUTHENTIK_CONFIG_TOTP: {{ .Values.authentik.config_totp | quote }}
+  AUTHENTIK_CONFIG_WEBAUTHN: {{ .Values.authentik.config_webauthn | quote }}
+  AUTHENTIK_CONFIG_STATIC: {{ .Values.authentik.config_static | quote }}
+  AUTHENTIK_CONFIG_PASSWORD: {{ .Values.authentik.config_password | quote }}
+
   TYPEORM_DB_SYNC: {{ .Values.backend.conf.TYPEORM_DB_SYNC | quote }}
   TYPEORM_DB_LOGGING: {{ .Values.backend.conf.TYPEORM_DB_LOGGING | quote }}
 kind: ConfigMap

@@ -150,6 +150,26 @@ spec:
                 configMapKeyRef:
                   key: AUTHENTIK_INVALIDATION_FLOW
                   name: env-{{ .Release.Name }}-backend
+            - name: AUTHENTIK_CONFIG_TOTP
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTHENTIK_CONFIG_TOTP
+                  name: env-{{ .Release.Name }}-backend
+            - name: AUTHENTIK_CONFIG_WEBAUTHN
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTHENTIK_CONFIG_WEBAUTHN
+                  name: env-{{ .Release.Name }}-backend
+            - name: AUTHENTIK_CONFIG_STATIC
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTHENTIK_CONFIG_STATIC
+                  name: env-{{ .Release.Name }}-backend
+            - name: AUTHENTIK_CONFIG_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: AUTHENTIK_CONFIG_PASSWORD
+                  name: env-{{ .Release.Name }}-backend
             - name: RELEASE_NAME
               valueFrom:
                 configMapKeyRef:
