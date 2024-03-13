@@ -33,7 +33,7 @@ spec:
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           name: {{ .Release.Name }}-db-migrator
           resources: {}
-          command: ['/usr/local/bin/node', '/jhaas-app/node_modules/typeorm/cli.js', 'migration:run', '-d', '/jhaas-app/dist/config/Config.js']
+          command: ['/usr/local/bin/node', '/jhaas-app/node_modules/typeorm/cli.js', 'migration:run', '-d', '/jhaas-app/dist/config/Database.js']
           env:
             - name: NODE_ENV
               valueFrom:
