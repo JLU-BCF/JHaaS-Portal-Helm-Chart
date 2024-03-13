@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    {{ .Release.Name }}.service: {{ .Release.Name }}-docs
+  name: {{ .Release.Name }}-docs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{ .Release.Name }}.service: {{ .Release.Name }}-docs
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        {{ .Release.Name }}.service: {{ .Release.Name }}-docs
+    spec:
+      containers:
+        - image: {{ .Values.docs.image.name }}
+          imagePullPolicy: {{ .Values.docs.image.pullPolicy }}
+          name: {{ .Release.Name }}-docs
+          ports:
+            - containerPort: {{ .Values.docs.conf.PORT }}
+          resources: {}
+      {{- if .Values.imageCredentials }}
+      imagePullSecrets:
+        {{- range .Values.imageCredentials }}
+        - name: sec-{{ $.Release.Name }}-{{ .name }}-registry-credentials
+        {{- end }}
+      {{- end }}
+      hostname: {{ .Release.Name }}-docs
+      restartPolicy: Always
+status: {}

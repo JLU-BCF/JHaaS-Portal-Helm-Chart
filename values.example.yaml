@@ -123,3 +123,12 @@ authentik:
   config_webauthn:
   config_static:
   config_password:
+
+docs:
+  enabled: true
+  image:
+    name: harbor.computational.bio.uni-giessen.de/jhaas/user:master
+    pullPolicy: IfNotPresent
+  conf:
+    PORT: "80"
+    PATH: "/docs"
