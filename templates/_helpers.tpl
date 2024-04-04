@@ -4,9 +4,35 @@
 {{- end }}
 {{- end }}
 
-{{- define "s3Config" }}
+{{- define "s3MinioConfig" }}
 {{- with .Values.s3 }}
-{{- printf "{ \"aliases\": { \"s3\": { \"url\": \"%s://%s:%s\", \"accessKey\": \"%s\", \"secretKey\": \"%s\", \"api\": \"%s\" } } }" (.ssl | ternary "https" "http") .host .port .access_key .secret_key .api | b64enc | quote }}
+{
+  "aliases": {
+    "s3": {
+        "url": "{{ printf "%s://%s:%s" (.ssl | ternary "https" "http") .host .port }}",
+        "accessKey": "{{ .access_key }}",
+        "secretKey": "{{ .secret_key }}",
+        "api": "{{ .api }}"
+    }
+  }
+}
+{{- end }}
+{{- end }}
+
+{{- define "s3GenericConfig" }}
+{{- with .Values.s3 }}
+[s3]
+type = s3
+provider = Other
+env_auth = false
+access_key_id = {{ .access_key }}
+secret_access_key = {{ .secret_key }}
+region =
+endpoint = {{ printf "%s://%s:%s" (.ssl | ternary "https" "http") .host .port }}
+location_constraint =
+acl =
+server_side_encryption =
+storage_class =
 {{- end }}
 {{- end }}
 
