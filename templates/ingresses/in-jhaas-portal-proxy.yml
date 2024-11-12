@@ -35,13 +35,6 @@ spec:
             name: sv-{{ .Release.Name }}-backend
             port:
               number: {{ .Values.backend.conf.PORT }}
-      - path: /(.*)$
-        pathType: Prefix
-        backend:
-          service:
-            name: sv-{{ .Release.Name }}-frontend
-            port:
-              number: {{ .Values.frontend.conf.PORT }}
       {{- if .Values.docs.enabled }}
       - path: {{ .Values.docs.conf.PATH }}/(.*)$
         pathType: Prefix
@@ -51,5 +44,12 @@ spec:
             port:
               number: {{ .Values.docs.conf.PORT }}
       {{- end }}
+      - path: /(.*)$
+        pathType: Prefix
+        backend:
+          service:
+            name: sv-{{ .Release.Name }}-frontend
+            port:
+              number: {{ .Values.frontend.conf.PORT }}
 
 {{- end }}

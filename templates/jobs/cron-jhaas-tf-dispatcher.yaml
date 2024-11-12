@@ -177,6 +177,16 @@ spec:
                     configMapKeyRef:
                       key: MAIL_SECURE
                       name: env-{{ .Release.Name }}-mail
+                - name: MAIL_USER
+                  valueFrom:
+                    secretKeyRef:
+                      key: MAIL_USER
+                      name: sec-{{ .Release.Name }}-mail
+                - name: MAIL_PASS
+                  valueFrom:
+                    secretKeyRef:
+                      key: MAIL_PASS
+                      name: sec-{{ .Release.Name }}-mail
                 - name: MAIL_FROM
                   valueFrom:
                     configMapKeyRef:

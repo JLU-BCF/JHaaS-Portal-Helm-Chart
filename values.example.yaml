@@ -83,6 +83,8 @@ mail:
   host: mailhog
   port: "2525"
   secure: false
+  user:
+  pass:
   from: portal@jhaas.local
   from_name: JHaaS Portal
   copy_addresses: "['admins@jhaas.local']"
