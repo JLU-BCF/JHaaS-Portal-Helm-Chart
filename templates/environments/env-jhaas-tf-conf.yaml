@@ -3,10 +3,12 @@ data:
   JHAAS_DOMAIN: {{ .Values.jhaas.domain | quote }}
   JHAAS_ISSUER: {{ .Values.jhaas.issuer | quote }}
   JHAAS_ICON: {{ .Values.jhaas.icon | quote }}
+  JH_CHART_VERSION: {{ .Values.jhaas.jh_chart_version | quote }}
   JHAAS_AUTHENTIK_URL: {{ .Values.authentik.url | quote }}
   JHAAS_AUTHENTIK_TOKEN: {{ .Values.authentik.api_secret | quote }}
   JHAAS_AUTHENTICATION_FLOW: {{ .Values.authentik.authentication_flow | quote }}
   JHAAS_AUTHORIZATION_FLOW: {{ .Values.authentik.authorization_flow | quote }}
+  JHAAS_INVALIDATION_FLOW: {{ .Values.authentik.invalidation_flow | quote }}
 kind: ConfigMap
 metadata:
   creationTimestamp: null
