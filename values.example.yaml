@@ -101,6 +101,13 @@ s3:
     tf_state: tf-state
     jh_specs: jh-specs
 
+s3_data:
+  host: localhost
+  port: "80"
+  ssl: false
+  access_key: access
+  secret_key: secret
+
 terraform:
   host: "localhost"
   token: "aaabbbccc"

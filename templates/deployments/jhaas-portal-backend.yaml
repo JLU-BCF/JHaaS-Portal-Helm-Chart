@@ -260,6 +260,31 @@ spec:
                 configMapKeyRef:
                   key: MAIL_FEEDBACK_ADDRESS
                   name: env-{{ .Release.Name }}-mail
+            - name: S3_DATA_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: endpoint
+                  name: env-{{ .Release.Name }}-s3-data-conf
+            - name: S3_DATA_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: port
+                  name: env-{{ .Release.Name }}-s3-data-conf
+            - name: S3_DATA_SSL
+              valueFrom:
+                configMapKeyRef:
+                  key: use_ssl
+                  name: env-{{ .Release.Name }}-s3-data-conf
+            - name: S3_DATA_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: access_key
+                  name: sec-{{ .Release.Name }}-s3-data-conf
+            - name: S3_DATA_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secret_key
+                  name: sec-{{ .Release.Name }}-s3-data--conf
           image: {{ .Values.backend.image.name }}
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           name: {{ .Release.Name }}-backend

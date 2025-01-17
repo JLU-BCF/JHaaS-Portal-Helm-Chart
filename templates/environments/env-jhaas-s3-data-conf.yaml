@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  endpoint: {{ .Values.s3_data.host | quote }}
+  port: {{ .Values.s3_data.port | quote }}
+  use_ssl: {{ .Values.s3_data.ssl | quote }}
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    {{ .Release.Name }}.environment: {{ .Release.Name }}-s3-data-conf
+  name: env-{{ .Release.Name }}-s3-data-conf
