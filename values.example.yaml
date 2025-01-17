@@ -107,6 +107,9 @@ s3_data:
   ssl: false
   access_key: access
   secret_key: secret
+  # For the tf worker to know where to find secret on jh cluster:
+  secret_namespace: datashim
+  secret_name: jhaas-s3-data-conf
 
 terraform:
   host: "localhost"

@@ -3,6 +3,8 @@ data:
   endpoint: {{ .Values.s3_data.host | quote }}
   port: {{ .Values.s3_data.port | quote }}
   use_ssl: {{ .Values.s3_data.ssl | quote }}
+  secret_namespace: {{ .Values.s3_data.secret_namespace | quote }}
+  secret_name: {{ .Values.s3_data.secret_name | quote }}
 kind: ConfigMap
 metadata:
   creationTimestamp: null

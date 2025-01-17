@@ -135,6 +135,16 @@ spec:
                   value: sec-{{ .Release.Name }}-s3-conf
                 - name: TF_SECRET_NAME
                   value: sec-{{ .Release.Name }}-tf-conf
+                - name: S3_DATA_SECRET_NAME
+                  valueFrom:
+                    configMapKeyRef:
+                      key: secret_name
+                      name: env-{{ .Release.Name }}-s3-data-conf
+                - name: S3_DATA_SECRET_NAMESPACE
+                  valueFrom:
+                    configMapKeyRef:
+                      key: secret_namespace
+                      name: env-{{ .Release.Name }}-s3-data-conf
                 # POSTGRES
                 - name: POSTGRES_HOST
                   valueFrom:
