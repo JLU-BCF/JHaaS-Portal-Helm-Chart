@@ -284,7 +284,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: secret_key
-                  name: sec-{{ .Release.Name }}-s3-data--conf
+                  name: sec-{{ .Release.Name }}-s3-data-conf
           image: {{ .Values.backend.image.name }}
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           name: {{ .Release.Name }}-backend
